@@ -27,3 +27,6 @@ Thumbs.db
 
 #data files
 data/
+
+#docs files
+docs/
