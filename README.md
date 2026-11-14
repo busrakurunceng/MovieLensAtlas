@@ -44,11 +44,22 @@ The notebook was tested on **Windows** with **Python 3.11**, **JDK 17**, and **P
 
    ```powershell
    py -3.11 -m venv .venv
-   .\.venv\Scripts\python.exe -m pip install "pyspark==4.1.1" ipykernel
+   .\.venv\Scripts\python.exe -m pip install "pyspark==4.1.1" ipykernel  pandas matplotlib pyarrow
    ```
 
 4. Open [`notebooks/MovieLensAtlas.ipynb`](notebooks/MovieLensAtlas.ipynb), select the Python kernel from `.venv`, and run the cells in order. The first test should print Spark version `4.1.1`, mode `local[2]`, and a filtered row count of `3`.
 
 ## CSV vs. Parquet
 
-The planned benchmark writes the same validated ratings to CSV and Parquet, then runs the same Spark query on both: filter to full calendar months from May 2000 through January 2003 and calculate monthly rating counts and distinct active users in UTC. After checking that both formats produce identical results, the benchmark will compare median read-and-query time across repeated runs and total data-file size for each format.
+Spark ran the same query on both files: count ratings and distinct active
+users for each month from May 2000 through January 2003. Both formats
+returned identical results for all 33 months.
+
+| Metric | CSV (uncompressed) | Parquet (Snappy) |
+| --- | ---: | ---: |
+| File size | 22,593,746 bytes | 5,311,430 bytes |
+| Median read and query time (5 runs) | 1.221 s | 0.823 s |
+
+In this local test, Parquet used less disk space and returned the same
+results faster. The timing includes reading and running the query.
+File creation was outside the timed portion.
