@@ -32,6 +32,8 @@ The notebook has verified these data checks:
 - All **1,000,209** rating records parsed successfully. Every rating was between **1 and 5**.
 - Every rating had a positive timestamp. The earliest and latest recorded ratings were **April 25, 2000 at 23:05:32 UTC** and **February 28, 2003 at 17:49:50 UTC**.
 
+- **Four stars** was the most common rating, with 348,971 ratings (34.89% of all ratings). Together, four- and five-star ratings accounted for 57.52%.
+
 ## How to Run
 
 The notebook was tested on **Windows** with **Python 3.11**, **JDK 17**, and **PySpark 4.1.1** in local mode (`local[2]`). Install the Python and Jupyter extensions in VS Code and set `JAVA_HOME` to your JDK 17 installation.
