@@ -6,12 +6,13 @@ MovieLensAtlas uses MovieLens 1M to explore how ratings vary by genre, whether t
 
 ## Analysis Questions
 
-The planned analysis starts with the overall distribution of 1–5 star ratings, then asks four questions:
+The analysis starts with the overall distribution of 1–5 star ratings,then examines five questions:
 
 1. **Genres:** How do rating counts, average ratings, and the share of 4–5 star ratings vary by genre? A rating contributes to each genre assigned to its film.
 2. **Rankings and concentration:** How many films appear in both top-10 lists, one ranked by rating count and the other by average rating? What share of all ratings goes to the 50 most-rated films?
 3. **Rating disagreement:** How different can the rating distributions be for films with similar averages? Standard deviation helps identify films to compare.
 4. **Monthly activity:** How do the number of ratings and the number of distinct users who rated a film change month by month?
+5. **Genre diversity:** Do users who rate more films also rate films across more genres? How does the comparison change when exactly 20 rated films are sampled per user?
 
 ## Dataset
 
@@ -58,8 +59,9 @@ returned identical results for all 33 months.
 | Metric | CSV (uncompressed) | Parquet (Snappy) |
 | --- | ---: | ---: |
 | File size | 22,593,746 bytes | 5,311,430 bytes |
-| Median read and query time (5 runs) | 1.221 s | 0.823 s |
+| Median read and query time (5 runs) | 1.339 s | 0.882 s |
 
-In this local test, Parquet used less disk space and returned the same
-results faster. The timing includes reading and running the query.
-File creation was outside the timed portion.
+In this local test, Snappy-compressed Parquet used 76.5% less disk space
+than uncompressed CSV. The median time to read the file and run the
+same query was 34.1% shorter with Parquet. File creation was outside
+the timed portion.
